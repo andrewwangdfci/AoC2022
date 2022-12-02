@@ -1,8 +1,12 @@
 
 import time
+from pathlib import Path
 
+###Basics on each day
 start_time = time.time()
+p = Path(__file__).with_name('input.txt')
 
+##variables
 i = 0
 points = {}
 points["A"] = 1 #Rock
@@ -15,7 +19,9 @@ points["W"] = 6
 points["L"] = 0
 points["D"] = 3
 total = 0
-with open(r'C:\Users\aw1022\OneDrive - Mass General Brigham\Documents\GitHub\AoC2022\Day_2\input.txt', 'r') as file:
+
+##code
+with open(p, 'r') as file:
     content = file.readlines()
     for line in content:
         you = line[-2].strip()
@@ -39,7 +45,7 @@ with open(r'C:\Users\aw1022\OneDrive - Mass General Brigham\Documents\GitHub\AoC
 print(total)
 
 total = 0
-with open(r'C:\Users\aw1022\OneDrive - Mass General Brigham\Documents\GitHub\AoC2022\Day_2\input.txt', 'r') as file:
+with open(p, 'r') as file:
     content = file.readlines()
     for line in content:
         outcome_requirement = line[-2].strip()
@@ -57,7 +63,6 @@ with open(r'C:\Users\aw1022\OneDrive - Mass General Brigham\Documents\GitHub\AoC
                 outcome_required = "W"
                 you = (points[opponent] % 3) + 1 
 
-        
         total = total + you + points[outcome_required]
 print(total)
 print("--- %s seconds ---" % (time.time() - start_time))
