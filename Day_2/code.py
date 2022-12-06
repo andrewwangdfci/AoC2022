@@ -18,7 +18,9 @@ points["Z"] = 3 #Scissors
 points["W"] = 6
 points["L"] = 0
 points["D"] = 3
-total = 0
+total_1 = 0
+total_2 = 0
+points_array = [3,1,2]
 
 ##code
 with open(p, 'r') as file:
@@ -41,29 +43,22 @@ with open(p, 'r') as file:
                     outcome_points = "W"
                 else:
                     outcome_points = "L"
-        total = total + points[you] + points[outcome_points]
-print(total)
 
-total = 0
-with open(p, 'r') as file:
-    content = file.readlines()
-    for line in content:
-        outcome_requirement = line[-2].strip()
         opponent = line[:1].strip()
-        match outcome_requirement:
+        match you:
             case "X":
                 outcome_required = "L"
-                you = points[opponent] - 1
-                if you == 0:
-                    you = 3
+                you_points = points_array[points[opponent] - 1]
             case "Y":
                 outcome_required = "D"
-                you = points[opponent]
+                you_points = points[opponent]
             case "Z":
                 outcome_required = "W"
-                you = (points[opponent] % 3) + 1 
+                you_points = (points[opponent] % 3) + 1 
+        total_1 = total_1 + points[you] + points[outcome_points]
+        total_2 = total_2 + you_points + points[outcome_required]
+print(total_1)
+print(total_2)
 
-        total = total + you + points[outcome_required]
-print(total)
 print("--- %s seconds ---" % (time.time() - start_time))
 
